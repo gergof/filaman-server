@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import User from './User';
 import Material from './Material';
 
@@ -7,10 +7,12 @@ class Spool {
 	@PrimaryGeneratedColumn()
 	id!:number;
 
-	@ManyToOne(() => User)
+	@ManyToOne(() => User, {onDelete: 'CASCADE'})
+	@JoinColumn()
 	user!: User;
 
-	@ManyToOne(() => Material)
+	@ManyToOne(() => Material, {onDelete: 'CASCADE'})
+	@JoinColumn()
 	material!: Material;
 
 	@Column('varchar', {length: 60})

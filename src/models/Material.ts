@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import User from './User';
 
 @Entity('materials')
@@ -6,7 +6,8 @@ class Material {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@ManyToOne(() => User)
+	@ManyToOne(() => User, {onDelete: 'CASCADE'})
+	@JoinColumn()
 	user!: User;
 
 	@Column('varchar', {length: 60})

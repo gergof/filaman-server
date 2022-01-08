@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import User from './User';
 
-@Entity('auth_sessions')
-class AuthSession {
+@Entity('images')
+class Image {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
@@ -10,11 +10,11 @@ class AuthSession {
 	@JoinColumn()
 	user!: User;
 
-	@Column('varchar', {length: '128'})
-	token!: string;
+	@Column('varchar', {length: 255})
+	path!: string;
 
-	@Column()
-	expiry!: Date
+	@Column('varchar', {length: 64})
+	blurhash!: string;
 }
 
-export default AuthSession;
+export default Image;
