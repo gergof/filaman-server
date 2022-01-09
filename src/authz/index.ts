@@ -75,7 +75,7 @@ class Authz {
 	}
 
 	public async init(): Promise<void> {
-		await this.oso.loadFiles(policies.map(file => path.join(__dirname, 'policies', 'file')));
+		await this.oso.loadFiles(policies.map(file => path.join(__dirname, 'policies', file)));
 	}
 
 	public authorize(

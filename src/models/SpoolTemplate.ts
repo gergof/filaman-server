@@ -24,16 +24,16 @@ class SpoolTemplate {
 	@Column('varchar', {length: 7})
 	color!: string;
 
-	@Column('decimal', {scale: 8, precision: 5})
+	@Column('decimal', {precision: 8, scale: 5})
 	diameter!: number;
 
-	@Column('decimal', {scale: 8, precision: 3})
+	@Column('decimal', {precision: 8, scale: 3})
 	totalWeight!: number;
 
-	@Column('decimal', {scale: 8, precision: 3})
+	@Column('decimal', {precision: 8, scale: 3})
 	weight!: number;
 
-	@Column('decimal', {scale: 10, precision: 2})
+	@Column('decimal', {precision: 10, scale: 2})
 	priceValue!: number;
 
 	@Column('varchar', {length: 5})

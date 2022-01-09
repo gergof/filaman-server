@@ -19,7 +19,7 @@ class Print {
 	@Column('varchar', {length: 60})
 	name!: string;
 
-	@Column('decimal', {scale: 8, precision: 3})
+	@Column('decimal', {precision: 8, scale: 3})
 	weight!: number;
 
 	@ManyToOne(() => Printer, {onDelete: 'CASCADE'})
@@ -30,7 +30,7 @@ class Print {
 	@JoinColumn()
 	spool!: Spool;
 
-	@Column('decimal', {scale: 5, precision: 2, nullable: true})
+	@Column('decimal', {precision: 5, scale: 2, nullable: true})
 	progress!: number | null;
 
 	@Column('int', {unsigned: true, nullable: true})

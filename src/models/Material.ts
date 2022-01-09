@@ -16,7 +16,7 @@ class Material {
 	@Column('varchar', {length: 10})
 	code!: string;
 
-	@Column('decimal', {scale: 8, precision: 5})
+	@Column('decimal', {precision: 8, scale: 5})
 	density!: number;
 
 	@Column('text', {nullable: true})

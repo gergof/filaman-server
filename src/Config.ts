@@ -14,6 +14,7 @@ export interface OidcProviderConfig {
 	discovery: string;
 	client: string;
 	secret: string;
+	callback: string;
 }
 
 export interface OidcConfig {
@@ -28,6 +29,10 @@ export interface SmtpConfig {
 	password: string;
 }
 
+export interface ApiConfig {
+	port: number;
+}
+
 export interface LogConfig {
 	level: string;
 	format: string;
@@ -38,6 +43,7 @@ class Config {
 	_db: DbConfig;
 	_oidc: OidcConfig;
 	_smtp: SmtpConfig;
+	_api: ApiConfig;
 	_log: LogConfig;
 
 	constructor() {
@@ -57,7 +63,8 @@ class Config {
 			providers: _.times(oidcCount).map(i => ({
 				discovery: env.get(`OIDC_${i+1}_DISCOVERY`).required().asString(),
 				client: env.get(`OIDC_${i+1}_CLIENT`).required().asString(),
-				secret: env.get(`OIDC_${i+1}_SECRET`).required().asString()
+				secret: env.get(`OIDC_${i+1}_SECRET`).required().asString(),
+				callback: env.get(`OIDC_${i+1}_CALLBACK`).required().asString()
 			}))
 		};
 
@@ -67,6 +74,10 @@ class Config {
 			user: env.get('SMTP_USER').required().asString(),
 			password: env.get('SMTP_PASSWORD').required().asString()
 		}
+
+		this._api = {
+			port: env.get('API_PORT').default(80).asPortNumber()
+		};
 
 		this._log = {
 			level: env.get('LOG_LEVEL').default('info').asString(),
@@ -85,6 +96,10 @@ class Config {
 
 	public get smtp(): SmtpConfig {
 		return _.cloneDeep(this._smtp);
+	}
+
+	public get api(): ApiConfig {
+		return _.cloneDeep(this._api);
 	}
 
 	public get log(): LogConfig {

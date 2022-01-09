@@ -73,7 +73,7 @@ class Logger {
 		});
 	}
 
-	getLogger(group: string): Winston.Logger {
+	createLogger(group: string): Winston.Logger {
 		return this.winston.child({ group });
 	}
 }
