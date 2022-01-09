@@ -14,7 +14,7 @@ class Print {
 	user!: User;
 
 	@Column()
-	expiry!: Date;
+	date!: Date;
 
 	@Column('varchar', {length: 60})
 	name!: string;
