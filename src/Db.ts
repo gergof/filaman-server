@@ -21,7 +21,8 @@ class Db {
 			password: config.password,
 			database: config.name,
 			synchronize: true,
-			entities: Object.entries(models).map(entry => entry[1])
+			entities: Object.entries(models).map(entry => entry[1]),
+			logging: this.logger.level == 'debug'
 		});
 	}
 

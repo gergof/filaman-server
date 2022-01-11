@@ -7,6 +7,6 @@ const policies = [
 	'Spool.polar',
 	'SpoolTemplate.polar',
 	'User.polar'
-]
+];
 
 export default policies;

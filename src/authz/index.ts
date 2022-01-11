@@ -1,12 +1,23 @@
-import Winston from 'winston';
+import path from 'path';
+
 import { Oso, Relation, Class } from 'oso';
-import { User, AuthRealm, AuthSession, Image, Material, Print, Printer, Spool, SpoolTemplate } from '../models';
+import Winston from 'winston';
+
+import Db from '../Db';
+import {
+	User,
+	Image,
+	Material,
+	Print,
+	Printer,
+	Spool,
+	SpoolTemplate
+} from '../models';
+
 import type Action from './Action';
 import type Resource from './Resource';
-import Db from '../Db';
 import { combineDbQuery, buildDbQuery } from './filteringUtils';
 import policies from './policies';
-import path from 'path';
 
 class Authz {
 	private logger: Winston.Logger;
@@ -18,7 +29,10 @@ class Authz {
 		this.db = db;
 
 		this.oso = new Oso<User, Action, Resource, unknown, unknown>();
-		this.oso.setDataFilteringQueryDefaults({combineQuery: combineDbQuery, buildQuery: buildDbQuery});
+		this.oso.setDataFilteringQueryDefaults({
+			combineQuery: combineDbQuery,
+			buildQuery: buildDbQuery
+		});
 
 		this.registerClasses();
 	}
@@ -42,7 +56,7 @@ class Authz {
 			execQuery: this.db.execFromRepo(Print),
 			fields: {
 				id: Number,
-				user: new Relation('one', 'User', 'userId', 'id'),
+				user: new Relation('one', 'User', 'userId', 'id')
 			}
 		});
 		this.oso.registerClass(Printer, {
@@ -75,7 +89,9 @@ class Authz {
 	}
 
 	public async init(): Promise<void> {
-		await this.oso.loadFiles(policies.map(file => path.join(__dirname, 'policies', file)));
+		await this.oso.loadFiles(
+			policies.map(file => path.join(__dirname, 'policies', file))
+		);
 	}
 
 	public authorize(

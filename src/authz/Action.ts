@@ -1,3 +1,3 @@
-type Action = "read" | "update" | "delete";
+type Action = 'read' | 'update' | 'delete';
 
 export default Action;

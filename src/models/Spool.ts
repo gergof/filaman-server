@@ -1,45 +1,52 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import User from './User';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	ManyToOne,
+	JoinColumn
+} from 'typeorm';
+
 import Material from './Material';
+import User from './User';
 
 @Entity('spools')
 class Spool {
 	@PrimaryGeneratedColumn()
-	id!:number;
+	id!: number;
 
-	@ManyToOne(() => User, {onDelete: 'CASCADE'})
+	@ManyToOne(() => User, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	user!: User;
 
-	@ManyToOne(() => Material, {onDelete: 'CASCADE'})
+	@ManyToOne(() => Material, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	material!: Material;
 
-	@Column('varchar', {length: 60})
+	@Column('varchar', { length: 60 })
 	name!: string;
 
-	@Column('varchar', {length: 8})
+	@Column('varchar', { length: 8 })
 	code!: string;
 
-	@Column('varchar', {length: 120, nullable: true})
+	@Column('varchar', { length: 120, nullable: true })
 	manufacturer!: string;
 
-	@Column('varchar', {length: 7})
+	@Column('varchar', { length: 7 })
 	color!: string;
 
-	@Column('decimal', {precision: 8, scale: 5})
+	@Column('decimal', { precision: 8, scale: 5 })
 	diameter!: number;
 
-	@Column('decimal', {precision: 8, scale: 3})
+	@Column('decimal', { precision: 8, scale: 3 })
 	totalWeight!: number;
 
-	@Column('decimal', {precision: 8, scale: 3})
+	@Column('decimal', { precision: 8, scale: 3 })
 	weight!: number;
 
-	@Column('decimal', {precision: 10, scale: 2})
+	@Column('decimal', { precision: 10, scale: 2 })
 	priceValue!: number;
 
-	@Column('varchar', {length: 5})
+	@Column('varchar', { length: 5 })
 	priceCurrency!: string;
 }
 
