@@ -1,10 +1,9 @@
 resource Image {
-	permissions = ["read", "modify", "delete"];
+	permissions = ["read", "delete"];
 	roles = ["Owner"];
 	relations = { user: User };
 
 	"read" if "Owner";
-	"modify" if "Owner";
 	"delete" if "Owner";
 
 	"Owner" if "Owner" on "user";

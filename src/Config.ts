@@ -29,6 +29,12 @@ export interface SmtpConfig {
 	password: string;
 }
 
+export interface AwsConfig {
+	region: string;
+	keyId: string;
+	secret: string;
+}
+
 export interface ApiConfig {
 	port: number;
 }
@@ -43,6 +49,7 @@ class Config {
 	_db: DbConfig;
 	_oidc: OidcConfig;
 	_smtp: SmtpConfig;
+	_aws: AwsConfig;
 	_api: ApiConfig;
 	_log: LogConfig;
 
@@ -87,6 +94,12 @@ class Config {
 			password: env.get('SMTP_PASSWORD').required().asString()
 		};
 
+		this._aws = {
+			region: env.get('AWS_REGION').required().asString(),
+			keyId: env.get('AWS_KEY_ID').required().asString(),
+			secret: env.get('AWS_SECRET').required().asString()
+		};
+
 		this._api = {
 			port: env.get('API_PORT').default(80).asPortNumber()
 		};
@@ -110,6 +123,10 @@ class Config {
 
 	public get smtp(): SmtpConfig {
 		return _.cloneDeep(this._smtp);
+	}
+
+	public get aws(): AwsConfig {
+		return _.cloneDeep(this._aws);
 	}
 
 	public get api(): ApiConfig {

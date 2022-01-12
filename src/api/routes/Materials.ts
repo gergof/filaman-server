@@ -19,7 +19,7 @@ import Route from './Route';
 const MaterialsRoute: Route = async (fastify, ctx) => {
 	fastify.get('/materials', (req, resp) => {
 		return auth(req, resp, ctx, async user => {
-			const query = ctx.authz.authorizedQuery(user, 'read', Material);
+			const query = await ctx.authz.authorizedQuery(user, 'read', Material);
 			return await ctx.db.conn.getRepository(Material).find({
 				where: query,
 				order: {
@@ -107,7 +107,7 @@ const MaterialsRoute: Route = async (fastify, ctx) => {
 					!material ||
 					!(await ctx.authz.authorize(user, 'modify', material))
 				) {
-					notFoundHelper(req, resp);
+					forbiddenHelper(req, resp);
 					return;
 				}
 
@@ -144,11 +144,11 @@ const MaterialsRoute: Route = async (fastify, ctx) => {
 					!material ||
 					!(await ctx.authz.authorize(user, 'delete', material))
 				) {
-					notFoundHelper(req, resp);
+					forbiddenHelper(req, resp);
 					return;
 				}
 
-				await ctx.db.conn.getRepository(Material).delete(material);
+				await ctx.db.conn.getRepository(Material).remove(material);
 
 				return {
 					deleted: true

@@ -18,15 +18,21 @@ class SpoolTemplate {
 	@JoinColumn()
 	user!: User;
 
+	@Column()
+	userId!: number;
+
 	@ManyToOne(() => Material, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	material!: Material;
+
+	@Column()
+	materialId!: number;
 
 	@Column('varchar', { length: 60 })
 	name!: string;
 
 	@Column('varchar', { length: 120, nullable: true })
-	manufacturer!: string;
+	manufacturer!: string | null;
 
 	@Column('varchar', { length: 7 })
 	color!: string;
