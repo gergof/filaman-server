@@ -122,6 +122,14 @@ class Authz {
 	): Promise<T[]> {
 		return this.oso.authorizedResources(actor, action, resource);
 	}
+
+	public authorizedQuery<T extends Resource>(
+		actor: User,
+		action: Action,
+		resource: Class<T>
+	): Promise<any> {
+		return this.oso.authorizedQuery(actor, action, resource);
+	}
 }
 
 export default Authz;

@@ -17,6 +17,9 @@ class Material {
 	@JoinColumn()
 	user!: User;
 
+	@Column()
+	userId!: number;
+
 	@Column('varchar', { length: 60 })
 	name!: string;
 
