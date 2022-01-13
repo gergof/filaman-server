@@ -18,6 +18,9 @@ class Spool {
 	@JoinColumn()
 	user!: User;
 
+	@Column()
+	userId!: number;
+
 	@ManyToOne(() => Material, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	material!: Material;
