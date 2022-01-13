@@ -133,7 +133,7 @@ const PrintersRoute: Route = async (fastify, ctx) => {
 				const patch: Record<string, string | number | null | Image> =
 					{};
 				Object.entries(req.body).forEach(([key, value]) => {
-					if (['imageId'].includes(key)) {
+					if (key == 'imageId' && value !== null) {
 						return;
 					}
 					patch[key] = value;

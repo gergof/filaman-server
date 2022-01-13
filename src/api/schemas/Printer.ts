@@ -7,7 +7,7 @@ export const Printer = Type.Object({
 	name: Type.String(),
 	code: Type.String(),
 	model: Type.String(),
-	image: Image,
+	image: Type.Union([Image, Type.Null()]),
 	notes: Type.Union([Type.String(), Type.Null()])
 });
 export type PrinterType = Static<typeof Printer>;

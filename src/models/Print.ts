@@ -44,6 +44,9 @@ class Print {
 	@JoinColumn()
 	spool!: Spool;
 
+	@Column()
+	spoolId!: number;
+
 	@Column('decimal', { precision: 5, scale: 2, nullable: true })
 	progress!: number | null;
 
