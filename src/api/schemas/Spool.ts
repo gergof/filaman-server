@@ -12,12 +12,12 @@ export const Spool = Type.Object({
 	weight: Type.Number(),
 	priceValue: Type.Number(),
 	priceCurrency: Type.String()
-})
+});
 export type SpoolType = Static<typeof Spool>;
 
 export const SpoolGetParams = Type.Object({
 	id: Type.Number()
-})
+});
 export type SpoolGetParamsType = Static<typeof SpoolGetParams>;
 
 export const SpoolCreateInput = Type.Omit(Spool, ['id', 'code']);

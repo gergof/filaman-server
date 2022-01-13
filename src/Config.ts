@@ -33,6 +33,11 @@ export interface AwsConfig {
 	region: string;
 	keyId: string;
 	secret: string;
+	public: {
+		s3: {
+			bucket: string;
+		};
+	};
 }
 
 export interface ApiConfig {
@@ -97,7 +102,12 @@ class Config {
 		this._aws = {
 			region: env.get('AWS_REGION').required().asString(),
 			keyId: env.get('AWS_KEY_ID').required().asString(),
-			secret: env.get('AWS_SECRET').required().asString()
+			secret: env.get('AWS_SECRET').required().asString(),
+			public: {
+				s3: {
+					bucket: env.get('AWS_S3_BUCKET').required().asString()
+				}
+			}
 		};
 
 		this._api = {

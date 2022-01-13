@@ -22,6 +22,9 @@ class Print {
 	user!: User;
 
 	@Column()
+	userId!: number;
+
+	@Column()
 	date!: Date;
 
 	@Column('varchar', { length: 60 })
@@ -33,6 +36,9 @@ class Print {
 	@ManyToOne(() => Printer, { onDelete: 'CASCADE' })
 	@JoinColumn()
 	printer!: Printer;
+
+	@Column()
+	printerId!: number;
 
 	@ManyToOne(() => Spool, { onDelete: 'CASCADE' })
 	@JoinColumn()

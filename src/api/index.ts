@@ -1,6 +1,9 @@
 import Fastify from 'fastify';
+import fastifyCors from 'fastify-cors';
+import fastifyFileUpload from 'fastify-file-upload';
 import Winston from 'winston';
 
+import Aws from '../Aws';
 import { ApiConfig } from '../Config';
 import Db from '../Db';
 import Oidc from '../Oidc';
@@ -15,19 +18,22 @@ class Api {
 	private db: Db;
 	private authz: Authz;
 	private oidc: Oidc;
+	private aws: Aws;
 
 	constructor(
 		config: ApiConfig,
 		logger: Winston.Logger,
 		db: Db,
 		authz: Authz,
-		oidc: Oidc
+		oidc: Oidc,
+		aws: Aws
 	) {
 		this.config = config;
 		this.logger = logger;
 		this.db = db;
 		this.authz = authz;
 		this.oidc = oidc;
+		this.aws = aws;
 
 		const fastifyLogger = {
 			...this.logger,
@@ -39,6 +45,8 @@ class Api {
 		this.fastify = Fastify({
 			logger: fastifyLogger
 		});
+		this.fastify.register(fastifyCors);
+		this.fastify.register(fastifyFileUpload);
 	}
 
 	public async start(): Promise<void> {
@@ -49,6 +57,7 @@ class Api {
 				db: this.db,
 				authz: this.authz,
 				oidc: this.oidc,
+				aws: this.aws,
 				logger: this.logger
 			});
 		}

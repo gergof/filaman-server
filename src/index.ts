@@ -1,3 +1,4 @@
+import Aws from './Aws';
 import Config from './Config';
 import Db from './Db';
 import Logger from './Logger';
@@ -13,12 +14,14 @@ const logger = loggerFactory.createLogger('main');
 const db = new Db(config.db, loggerFactory.createLogger('db'));
 const authz = new Authz(loggerFactory.createLogger('authz'), db);
 const oidc = new Oidc(config.oidc, loggerFactory.createLogger('oidc'));
+const aws = new Aws(config.aws, loggerFactory.createLogger('aws'));
 const api = new Api(
 	config.api,
 	loggerFactory.createLogger('api'),
 	db,
 	authz,
-	oidc
+	oidc,
+	aws
 );
 
 const main = async () => {

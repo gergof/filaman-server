@@ -19,7 +19,11 @@ import Route from './Route';
 const MaterialsRoute: Route = async (fastify, ctx) => {
 	fastify.get('/materials', (req, resp) => {
 		return auth(req, resp, ctx, async user => {
-			const query = await ctx.authz.authorizedQuery(user, 'read', Material);
+			const query = await ctx.authz.authorizedQuery(
+				user,
+				'read',
+				Material
+			);
 			return await ctx.db.conn.getRepository(Material).find({
 				where: query,
 				order: {
