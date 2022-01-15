@@ -1,5 +1,4 @@
 export { default as AuthRealm } from './AuthRealm';
-export { default as AuthSession } from './AuthSession';
 export { default as Image } from './Image';
 export { default as Material } from './Material';
 export { default as Print } from './Print';
