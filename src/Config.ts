@@ -12,9 +12,6 @@ export interface DbConfig {
 
 export interface OidcProviderConfig {
 	discovery: string;
-	client: string;
-	secret: string;
-	callback: string;
 }
 
 export interface OidcConfig {
@@ -75,18 +72,6 @@ class Config {
 			providers: _.times(oidcCount).map(i => ({
 				discovery: env
 					.get(`OIDC_${i + 1}_DISCOVERY`)
-					.required()
-					.asString(),
-				client: env
-					.get(`OIDC_${i + 1}_CLIENT`)
-					.required()
-					.asString(),
-				secret: env
-					.get(`OIDC_${i + 1}_SECRET`)
-					.required()
-					.asString(),
-				callback: env
-					.get(`OIDC_${i + 1}_CALLBACK`)
 					.required()
 					.asString()
 			}))
